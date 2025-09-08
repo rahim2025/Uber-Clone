@@ -1,14 +1,16 @@
-const dotenv = require("dotenv")
+import dotenv from "dotenv";
 dotenv.config()
-const express = require('express');
-const cors = require("cors")
+import express from "express";
+import cors from "cors";
 
 const app = express();
+import authRouter from "./routes/authRouter.js"
 
-app.use(cors())
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
-app.get("/",(req,res)=>{
-    res.send("Request Send")
-})
 
-module.exports = app;
+app.post("/auth",authRouter)
+
+export default app;
